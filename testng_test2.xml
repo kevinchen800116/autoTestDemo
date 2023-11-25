@@ -4,7 +4,6 @@
 	<parameter name="appiumDriverType" value="android"></parameter>
 	<parameter name="production" value="自動化測試題目"></parameter>
 	<parameter name="platform" value="Android"></parameter>
-	
 
 	 <test name="#1 自動化測試題目">
 		<classes>
