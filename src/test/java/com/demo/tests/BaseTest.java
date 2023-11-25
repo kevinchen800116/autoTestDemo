@@ -1,29 +1,18 @@
 package com.demo.tests;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URISyntaxException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.zip.Deflater;
-import java.util.zip.Inflater;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.ClientProtocolException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
@@ -35,10 +24,8 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import com.opencsv.bean.CsvToBeanBuilder;
 import com.demo.page.startPage;
 import com.demo.report.Reporter;
-import com.demo.report.TestListener;
 import com.demo.utils.AppiumUtils;
 import com.demo.utils.PropertyUtils;
 import com.demo.utils.ViewEnum;
@@ -66,22 +53,20 @@ public class BaseTest {
 	 * 每次Test run都會呼叫這個方法
 	 * 
 	 * @param appiumDriverType
-	 * @param csvName            => 要讀取的CSV檔檔名
-	 * @param csvIndex           => 要讀取的csv檔 第N行
-	 * @param installAppName(可選) => 要安裝的app檔名
+	 * @param installAppName(可選) => 要安裝的app檔
 	 * @param reinstallAppName(可選) => 要另外安裝的app檔名
 	 * @throws IOException
 	 * @throws InterruptedException
 	 * @throws KeyStoreException
 	 * @throws NoSuchAlgorithmException
 	 * @throws KeyManagementException
+	 * @throws MalformedURLException 
 	 */
 	@BeforeTest
-	@Parameters({ "appiumDriverType", "csvName", "csvIndex", "installAppName", "platform", "deviceName",
+	@Parameters({ "appiumDriverType", "installAppName", "platform", "deviceName",
 			"platformVersion", "iosDeviceUdid"})
-	public void setUpAppium(String appiumDriverType, String csvName, String csvIndex, @Optional String installAppName,
-			String platform,@Optional String deviceName,@Optional String platformVersion, @Optional String iosDeviceUdid) throws IOException, InterruptedException, KeyManagementException,
-			NoSuchAlgorithmException, KeyStoreException {
+	public void setUpAppium(String appiumDriverType, @Optional String installAppName,String platform,@Optional String deviceName,@Optional String platformVersion, @Optional String iosDeviceUdid) throws  InterruptedException, KeyManagementException,
+			NoSuchAlgorithmException, KeyStoreException, MalformedURLException {
 		
 		//Device connect
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -109,7 +94,7 @@ public class BaseTest {
 	}
 
 	@AfterMethod(alwaysRun = true)
-	public void afterMethod(final ITestResult result, ITestContext ctx) throws IOException {
+	public void afterMethod(final ITestResult result, ITestContext ctx)  {
 	}
 
 	@AfterClass
