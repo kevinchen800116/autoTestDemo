@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
  * 有關於wait相關的方法都在這個類別
  * <p>
  * 隱式等待(explicitWait)定義在.properties檔
- * @author David
  *
  */
 public class WaitUtils {

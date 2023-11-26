@@ -9,8 +9,6 @@ import java.util.Properties;
  * 用來獲取.properties裡面屬性用的類別
  * <p>
  * .properties檔應放置於resources 第一層底下
- * 
- * @author David on 2021/01/18
  */
 public class PropertyUtils {
 
