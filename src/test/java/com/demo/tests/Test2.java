@@ -18,7 +18,7 @@ public class Test2 extends BaseTest {
 			Assert.assertEquals(driver.getTitle(),title);
 			takeScrShot();
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			Assert.fail(e.getMessage()+",錯誤位置: "+e.getStackTrace()[0].getFileName()+"錯誤行數: "+e.getStackTrace()[0].getLineNumber());
 		}
 	}
 	
@@ -41,7 +41,7 @@ public class Test2 extends BaseTest {
 			// 計算選單項目數量
 			Assert.assertEquals(Page.countCreditCardMenuItem(),8);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			Assert.fail(e.getMessage()+",錯誤位置: "+e.getStackTrace()[0].getFileName()+"錯誤行數: "+e.getStackTrace()[0].getLineNumber());
 		}
 	}
 	
@@ -61,7 +61,7 @@ public class Test2 extends BaseTest {
 			System.out.println("共有停辦卡"+Page.scrollToleft_countStopCard()+"張");
 				
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			Assert.fail(e.getMessage()+",錯誤位置: "+e.getStackTrace()[0].getFileName()+"錯誤行數: "+e.getStackTrace()[0].getLineNumber());
 		}
 	}
 	
