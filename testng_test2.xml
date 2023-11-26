@@ -4,11 +4,22 @@
 	<parameter name="appiumDriverType" value="android"></parameter>
 	<parameter name="production" value="自動化測試題目"></parameter>
 	<parameter name="platform" value="Android"></parameter>
+	
 	 <test name="#1 自動化測試題目">
+	 <parameter name="url" value="https://www.cathaybk.com.tw/cathaybk/"></parameter>
+	 <parameter name="title" value="國泰世華銀行"></parameter>
+	 <parameter name="menu" value="左上角菜單"></parameter>
+	 <parameter name="menu1" value="個人金融"></parameter>
+	 <parameter name="menu2" value="產品介紹"></parameter>
+	 <parameter name="menu3" value="信用卡"></parameter>
+	 <parameter name="menu4" value="卡片介紹"></parameter>
+	 <parameter name="title2" value="信用卡介紹 - 信用卡 - 產品介紹 - 國泰世華銀行"></parameter>
 		<classes>
 			<class name="com.demo.tests.Test2">
 				<methods>
-					<include name="name"></include>
+					<include name="getURL"></include>
+					<include name="countMenuItem"></include>
+					<include name="countStopCard"></include>
 				</methods>
 			</class>
 		</classes>

@@ -11,7 +11,7 @@
 		<classes>
 			<class name="com.demo.tests.Test2">
 				<methods>
-					<include name="name"></include>
+					<include name="demoTest"></include>
 				</methods>
 			</class>
 		</classes>

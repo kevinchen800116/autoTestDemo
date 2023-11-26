@@ -11,7 +11,7 @@ public class logicTest2 {
     	
         int numberOfPeople = 100;
         int result = Q3_sort(numberOfPeople);
-        System.out.println("The last person standing is at position: " + result);
+        System.out.println("最後留下同事的順位: " + result);
 
     }
     
@@ -55,7 +55,7 @@ public class logicTest2 {
 			if (Character.isLetter(charType)) {
 	            int index = charType - 'a';
 	            if (index >= 0 && index < 26) { 
-	            	// 确保索引在合法范围内
+	            	// 確保索引在範圍內
 	                letterFrequency[index] = letterFrequency[index] + 1;
 	            }
 			}else if (Character.isDigit(charType)) {
@@ -63,7 +63,7 @@ public class logicTest2 {
 	            letterFrequency[index] = letterFrequency[index] + 1;
 			}
 		}
-        // 打印字母频率
+        // 印出字母頻率
         for (int i = 0; i < letterFrequency.length; i++) {
         	char currentChar;
         	if (i<26) {

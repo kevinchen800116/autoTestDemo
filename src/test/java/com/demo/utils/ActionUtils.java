@@ -14,11 +14,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSTouchAction;
 
-/**
- * 
- *
- * @author David on 2021/01/18
- */
+
 public class ActionUtils {
 
     /**

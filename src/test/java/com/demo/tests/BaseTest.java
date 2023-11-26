@@ -236,44 +236,6 @@ public class BaseTest {
 		AppiumUtils.switchView(driver, ViewEnum.WebView);
 	}
 	
-//	 public static byte[] compressData(byte[] inputData) throws Exception {
-//	        Deflater deflater = new Deflater();
-//	        deflater.setInput(inputData);
-//
-//	        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(inputData.length);
-//	        deflater.finish();
-//
-//	        byte[] buffer = new byte[1024];
-//	        while (!deflater.finished()) {
-//	            int count = deflater.deflate(buffer);
-//	            outputStream.write(buffer, 0, count);
-//	        }
-//
-//	        outputStream.close();
-//	        return outputStream.toByteArray();
-//	    }
-//	 
-//	    public static byte[] decompressString(String compressedInput) throws Exception {
-//	        byte[] compressedData = Base64.getDecoder().decode(compressedInput);
-//	        
-//	        Inflater inflater = new Inflater();
-//	        inflater.setInput(compressedData);
-//	        
-//	        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(compressedData.length);
-//	        
-//	        byte[] buffer = new byte[1024];
-//	        while (!inflater.finished()) {
-//	            int count = inflater.inflate(buffer);
-//	            outputStream.write(buffer, 0, count);
-//	        }
-//	        
-//	        outputStream.close();
-//	        byte[] decompressedData = outputStream.toByteArray();
-//	        
-//	        //return new String(decompressedData, "UTF-8");
-//	        return decompressedData;
-//	    }
-
 	/**
 	 * 清空截圖
 	 */

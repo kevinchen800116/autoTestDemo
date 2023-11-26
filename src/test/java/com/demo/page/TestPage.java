@@ -1,22 +1,19 @@
-package com.demo.page.login;
+package com.demo.page;
 
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
-
-import com.demo.page.BasePage;
 import com.demo.tests.BaseTest;
 import com.demo.utils.AppiumUtils;
 import com.demo.utils.ViewEnum;
 
 import io.appium.java_client.AppiumDriver;
 
-public class LoginPage extends BasePage{
+public class TestPage extends BasePage{
 	int count=0;
 
-	public LoginPage(AppiumDriver<WebElement> driver) {
+	public TestPage(AppiumDriver<WebElement> driver) {
 		super(driver);
 	}
 	/**
@@ -53,14 +50,23 @@ public class LoginPage extends BasePage{
 	 */
 	@FindBy(css = "div.swiper-wrapper>a+a+a+a+a+a>p")
 	WebElement stopPublicCardMenu;
-	
+	/**
+	 * 停發卡
+	 * 	 
+	 */
 	@FindBy(css = "section+section+section+section+section+section>div>div+div>div>div>div")
 	List<WebElement> card10;
-	
+	/**
+	 * 停發卡 文字描述
+	 * 	 
+	 */
 	@FindBy(css = "section+section+section+section+section+section>div>div+div>div>div>div>div>div+div+div.cubre-m-compareCard__content  >div+div>div>div>div>div>div+div")
 	List<WebElement> cardDescription;
 	
-
+	/**
+	 * 往左滑並查看描述是否為本卡已停止申辦
+	 * 	 
+	 */
 	public int scrollToleft_countStopCard() {
 		for (int i = 0; i < card10.size(); i++) {
 			if (cardDescription.get(i).getText().equals("本卡已停止申辦")) {
@@ -71,12 +77,18 @@ public class LoginPage extends BasePage{
 		}
 		return count;
 	}
-	
+	/**
+	 * 往左滑 點擊 停發卡菜單
+	 * 	 
+	 */
 	public void click_StopCardMenu() throws Exception {
-		//特定位置左滑
 		AppiumUtils.scrollLeftToclickElement(driver,stopPublicCardMenu);
 	}
-	
+	/**
+	 *  點擊 信用卡列表內的選單
+	 *  EX:卡片介紹 
+	 * 	 
+	 */
 	public void click_CreditCardMenu(String target) throws Exception {
 		for (int i = 0; i < creditCardSubMenu.size(); i++) {
 			if (creditCardSubMenu.get(i).getText().equals(target)) {
@@ -86,12 +98,16 @@ public class LoginPage extends BasePage{
 		}
 		AppiumUtils.switchToWindow(driver,"信用卡介紹 - 信用卡 - 產品介紹 - 國泰世華銀行");
 	}
-	
+	/**
+	 * 計算信用卡菜單內有多少項目	 
+	 */
 	public int countCreditCardMenuItem() {
 		System.out.println("信用卡菜單內共有"+creditCardSubMenu.size()+"項目!");
 		return creditCardSubMenu.size();
 	}
-	
+	/**
+	 * 點擊 產品介紹內的選單項目
+	 */
 	public void click_productSubMenu(String target) throws Exception {
 		for (int i = 0; i < productSubMenu.size(); i++) {
 			if (productSubMenu.get(i).getText().equals(target)) {
@@ -100,7 +116,9 @@ public class LoginPage extends BasePage{
 			}
 		}
 	}
-	
+	/**
+	 * 點擊 產品介紹
+	 */
 	public void click_productMenu(String target) throws Exception {
 		for (int i = 0; i < productMenu.size(); i++) {
 			if (productMenu.get(i).getText().equals(target)) {
@@ -109,8 +127,10 @@ public class LoginPage extends BasePage{
 			}
 		}
 	}
-	
-	public void click_subMenu(String targetSubMenu) throws Exception {
+	/**
+	 * 驗證 菜單是否有出現
+	 */
+	public void checkSubMenuDisplay(String targetSubMenu) throws Exception {
 		for (int i = 0; i < siteSubMenu.size(); i++) {
 			if (siteSubMenu.get(i).getText().equals(targetSubMenu)) {
 				System.out.println("菜單["+targetSubMenu+"]出現了!");
@@ -118,19 +138,23 @@ public class LoginPage extends BasePage{
 			}
 		}
 	}
-	
+	/**
+	 * 點擊左上角菜單
+	 */
 	public void click_siteMenu(String targetMenu) throws Exception {
 		elementClick(siteMenu,targetMenu);
 	}
-	
-	public void getUrl(String Url) {
-		System.out.println("debug: 準備進入國泰世華網站");
+	/**
+	 * 到指定url頁面
+	 */
+	public void getUrl(String Url,String window) {
+		System.out.println("準備進入"+window+"網站");
 		driver.get(Url);
-		System.out.println("debug: 已進入國泰世華網站");
+		System.out.println("已進入"+window+"網站");
 		AppiumUtils.tapOnPoint(driver,100,100);
 		AppiumUtils.switchView(driver,ViewEnum.WebView);
-		AppiumUtils.switchToWindow(driver,"國泰世華銀行");
-		System.out.println("準備等待登入按鈕可被看見");
+		AppiumUtils.switchToWindow(driver,window);
+		System.out.println("已經轉換到"+window+"頁面");
 		waitUtils.waitForElementToBeVisible(loginBtn,30,driver);
 	}
 
