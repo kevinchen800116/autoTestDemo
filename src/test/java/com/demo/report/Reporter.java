@@ -3,6 +3,7 @@ package com.demo.report;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,11 @@ public class Reporter implements IReporter {
 	private static int failNB = 0;
 
 	private static String platform;
-
+	
+	static boolean continuetagForFail=false;
+	static boolean continuetagForSuccess=false;
+	private static ArrayList<Table> subFailTableList=new ArrayList<Table>();
+	private static ArrayList<Table> subSuccessTableList=new ArrayList<Table>();
 	/**
 	 * 取得成功story的表格
 	 * 
@@ -92,6 +97,11 @@ public class Reporter implements IReporter {
 			if (successStoryTable != null) {
 				successReport.add(successStoryTable.getpdfTable());
 			}
+			if (continuetagForSuccess) {
+				for (int i = 0; i < subSuccessTableList.size(); i++) {
+					continueReport(subSuccessTableList.get(i), true, i);
+				}
+			}
 
 			successReport.close();
 		} catch (DocumentException e) {
@@ -119,6 +129,11 @@ public class Reporter implements IReporter {
 			if (failStoryTable != null) {
 				failReport.add(failStoryTable.getpdfTable());
 			}
+			if (continuetagForFail) {
+				for (int i = 0; i < subFailTableList.size(); i++) {
+					continueReport(subFailTableList.get(i), false, i);
+				}
+			}
 
 			failReport.close();
 		} catch (DocumentException e) {
@@ -132,5 +147,58 @@ public class Reporter implements IReporter {
 
 	public static void setPlatform(String platform) {
 		Reporter.platform = platform;
+	}
+	
+	public static PdfPTable getSubPdfPTable(String production,ArrayList<Table>Tablelist,boolean continueTag) {
+		try {
+			if (Tablelist.size()==0) {
+				Tablelist.add(new Table().createGeneralTable());
+			}else if (Tablelist.size()>0 && continueTag==true && Tablelist.get(Tablelist.size()-1).getpdfTable().size()>50) {
+				Tablelist.add(new Table().createGeneralTable());
+			}
+			
+			Tablelist.get(Tablelist.size()-1).newRow(production);
+			return Tablelist.get(Tablelist.size()-1).getpdfTable();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	public static void continueReport(Table Tablelist,boolean testResult,int number) {
+		int sum=successNB+failNB;
+		try {
+			Document continueReport = new Document();
+			
+			if (testResult) {
+				PdfWriter.getInstance(continueReport, new FileOutputStream("App QA Report - Success"+number+".pdf"));
+			}else {
+				PdfWriter.getInstance(continueReport, new FileOutputStream("App QA Report - fail"+number+".pdf"));
+			}
+			
+			continueReport.open();
+
+			Font chineseFont = ChineseFont.getChineseFont();
+
+			Paragraph p = new Paragraph("App 自動化測試報告", chineseFont);
+			continueReport.add(p);
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+			Date now = new Date();
+			continueReport.add(new Paragraph(sdFormat.format(now).toString()));
+			p = new Paragraph("手機型號：" + platform, chineseFont);
+			continueReport.add(p);
+			p = new Paragraph("測試總數：" + sum + ", 成功數：" + successNB, chineseFont);
+			continueReport.add(p);
+
+			if (Tablelist != null) {
+				continueReport.add(Tablelist.getpdfTable());
+			}
+
+			continueReport.close();
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

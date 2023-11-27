@@ -6,7 +6,8 @@ import java.util.LinkedList;
 public class logicTest2 {
 
     public static void main(String[] args) {
-    	Q1();
+    	int[] originalArray = {53, 64, 75, 19, 92};
+    	Q1(originalArray);
     	Q2_count("Hello welcome to Cathay 60th year anniversary");
     	
         int numberOfPeople = 100;
@@ -84,8 +85,8 @@ public class logicTest2 {
     
     
     
-    public static void Q1() {
-        int[] originalArray = {53, 64, 75, 19, 92};
+    public static void Q1(int[] originalArray) {
+        //int[] originalArray = {53, 64, 75, 19, 92};
         int[] correctArray = correctfunction(originalArray);
 
         System.out.print("原本: ");
@@ -109,5 +110,4 @@ public class logicTest2 {
 
         return changeArray;
     }
-
 }

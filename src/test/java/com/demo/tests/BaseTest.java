@@ -134,7 +134,8 @@ public class BaseTest {
 		
 		if (StringUtils.stripToNull(installAppName)==null) {
 			
-			installAppName=PropertyUtils.getProperty("android.app.location")+"//"+PropertyUtils.getProperty("android.app.name");
+			installAppName=System.getProperty("user.dir")+PropertyUtils.getProperty("android.app.location")+PropertyUtils.getProperty("android.app.name");
+			System.out.println("安裝APP路徑: "+installAppName);
 			desiredCapabilities.setCapability(MobileCapabilityType.APP, installAppName);
 		}
 
@@ -166,7 +167,8 @@ public class BaseTest {
 
 		// 如果有傳入installAppName then setCapability(MobileCapabilityType.APP)
 		if (StringUtils.stripToNull(installAppName)==null) {
-			installAppName = PropertyUtils.getProperty("ios.app.location")+PropertyUtils.getProperty("ios.app.name");
+			installAppName = System.getProperty("user.dir")+PropertyUtils.getProperty("ios.app.location")+PropertyUtils.getProperty("ios.app.name");
+			System.out.println("安裝APP路徑: "+installAppName);
 		}
 		
 		// 如果有傳入installAppName then setCapability(MobileCapabilityType.APP)
